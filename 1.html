@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery_min.js"></script>
+</head>
+<body>
+    <button id="btn">发起不带参数的Get请求</button>
+    <button id="btn2">发起带参数的Get请求</button>
+    <button id="btn3">发起Post请求</button>
+    <button id="btn4">使用$.ajax发起get请求</button>
+    <button id="btn5">使用$.ajax发起post请求</button>
+    <script>
+        $(function(){
+            // 发起不带参数的Get请求
+            $('#btn').on('click', function(){
+                $.get('http://www.liulongbin.top:3006/api/getbooks', function(res){
+                console.log(res); //这里是res是服务器返回的数据
+            })
+            })
+            // 发起带参数的Get请求
+            $('#btn2').on('click',function(){
+                $.get('http://www.liulongbin.top:3006/api/getbooks',{id:1} ,function(res){
+                console.log(res); //这里是res是服务器返回的数据
+            })
+            })
+            //发起Post请求
+            $('#btn3').on('click',function(){
+                $.post('http://www.liulongbin.top:3006/api/addbook',{
+                    bookname: 'pink', 
+                    author: 'pink', 
+                    publisher:'pink'
+                } ,function(res){
+                console.log(res); //这里是res是服务器返回的数据
+                console.log('请求成功');
+            })
+            })
+            //使用$.ajax发起get请求
+            $('#btn4').on('click', function(){
+                $.ajax({
+                type: 'GET', 
+                url: 'http://www.liulongbin.top:3006/api/getbooks',
+                data: {id:1},
+                success: function(res){
+                    console.log(res)
+                }
+            })
+            })
+            //使用$.ajax发起post请求
+            $('#btn5').on('click', function(){
+                $.ajax({
+                type: 'POST', 
+                url: 'http://www.liulongbin.top:3006/api/addbook',
+                data: {
+                    bookname: '	pinK', 
+                    author: '罗贯中', 
+                    publisher:'北1'
+                },
+                success: function(res){
+                    console.log(res)
+                }
+            })
+            })
+        })
+    </script>
+</body>
+</html>
